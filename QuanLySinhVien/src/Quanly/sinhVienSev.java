@@ -1,5 +1,6 @@
 package Quanly;
 
+import ThuocTinh.DiemSinhVien;
 import ThuocTinh.sinhVien;
 import java.util.List;
 
@@ -39,5 +40,20 @@ public class sinhVienSev {
     }
     public void deleteUserSinhvien(int id){
         updatethongtinSV.deleteUserSinhvien(id);
+    }
+    public void TableSinhVien(int id){
+        updatethongtinSV.TableSinhVien(id);
+    }
+    public void DropTableSinhVien(int id){
+        updatethongtinSV.DropTable(id);
+    }
+    public void InsertThongTinSV(int id, String Name, String maMH){
+        updatethongtinSV.InsertThongTinSV(id, Name, maMH);
+    }
+    public void InsertMonHocSV(int id, String maMH, String tenMH){
+        updatethongtinSV.InsertMonHocSV(id, maMH, tenMH);
+    }
+    public List<DiemSinhVien> getAllDiemSinhvien(int id){
+        return updatethongtinSV.getAllDiemSinhvien(id);
     }
 }

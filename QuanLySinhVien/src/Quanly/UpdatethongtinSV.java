@@ -1,6 +1,7 @@
 package Quanly;
 
 import KetNoiSQL.JDBCConnection;
+import ThuocTinh.DiemSinhVien;
 import ThuocTinh.sinhVien;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -175,5 +176,84 @@ public class UpdatethongtinSV {
         } catch (SQLException ex) {
             Logger.getLogger(UpdatethongtinSV.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public void TableSinhVien(int id){
+        Connection con = JDBCConnection.getJDBCConnection();
+        String sql = "CREATE TABLE `du_lieu`.`diem" + String.valueOf(id) + "`"
+                + "( `Mã môn học` VARCHAR(45) NOT NULL, "
+                + "`Tên môn học` VARCHAR(45) NULL,"
+                + " `Điểm chuyên cần` VARCHAR(45) NULL, "
+                + "`Điểm giữa kỳ` VARCHAR(45) NULL, "
+                + "`Điểm cuối kỳ` VARCHAR(45) NULL,"
+                
+                + " PRIMARY KEY (`Mã môn học`));";
+        try {
+            PreparedStatement preparedStatement = con.prepareCall(sql);
+            int rs = preparedStatement.executeUpdate();
+            System.out.println(rs);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdatethongtinSV.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void DropTable(int id){
+        Connection con = JDBCConnection.getJDBCConnection();
+        String sql = "Drop Table du_lieu.diem" + String.valueOf(id);
+        try {
+            PreparedStatement preparedStatement = con.prepareCall(sql);
+            int rs = preparedStatement.executeUpdate();
+            System.out.println(rs);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdatethongtinSV.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    public void InsertThongTinSV(int id, String Name, String maMH){
+        Connection con = JDBCConnection.getJDBCConnection();
+        String sql = "Insert into du_lieu." + maMH + " (ID, `Họ và tên`) values (?,?)";
+        
+        try {
+            PreparedStatement preparedStatement = con.prepareCall(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.setString(2, Name);
+            int rs = preparedStatement.executeUpdate();
+            System.out.println(rs);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdatethongtinSV.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void InsertMonHocSV(int id, String maMH, String tenMH){
+        Connection con = JDBCConnection.getJDBCConnection();
+        String sql = "Insert into du_lieu.diem" + String.valueOf(id) + " (`Mã môn học`, `Tên môn học`) values (?,?)";
+        try {
+            PreparedStatement preparedStatement = con.prepareCall(sql);
+            preparedStatement.setString(1, maMH);
+            preparedStatement.setString(2, tenMH);
+            int rs = preparedStatement.executeUpdate();
+            System.out.println(rs);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdatethongtinSV.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public List<DiemSinhVien> getAllDiemSinhvien(int id){
+       List<DiemSinhVien> diemsinhviens = new ArrayList<DiemSinhVien>();
+        Connection con = JDBCConnection.getJDBCConnection();
+        String sql = "SELECT * FROM du_lieu.diem" + String.valueOf(id);
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                DiemSinhVien diemSinhVien1 = new DiemSinhVien();
+                diemSinhVien1.setMaMH(rs.getString("Mã môn học"));
+                diemSinhVien1.setTenMH(rs.getString("Tên môn học"));
+                diemSinhVien1.setDiemCC(rs.getString("Điểm chuyên cần"));
+                diemSinhVien1.setDiemGK(rs.getString("Điểm giữa kỳ"));
+                diemSinhVien1.setDiemCK(rs.getString("Điểm cuối kỳ"));
+                diemsinhviens.add(diemSinhVien1);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdatethongtinSV.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return diemsinhviens;
     }
 }

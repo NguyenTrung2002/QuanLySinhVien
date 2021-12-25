@@ -13,6 +13,42 @@ public class giangVien {
     private String phone;
     private String chuyenNganh;
     private String email;
+    private String maMonday;
+    private String userName;
+    private String passWord;
+    private String userType;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassWord() {
+        return passWord;
+    }
+
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public String getMaMonday() {
+        return maMonday;
+    }
+
+    public void setMaMonday(String maMonday) {
+        this.maMonday = maMonday;
+    }
 
     public giangVien() {
     }

@@ -5,51 +5,53 @@ package ThuocTinh;
  * @author trung
  */
 public class HocPhan {
-    private String maHP;
-    private String tenHP;
-    private String maMH;
-     private String tenKhoa;
+    private int Id;
+    private String Name;
+    private String diemCC;
+    private String diemGK;
+    private String diemCK;
 
     public HocPhan() {
     }
 
-    public HocPhan(String maHP, String tenHP, String maMH, String tenKhoa) {
-        this.maHP = maHP;
-        this.tenHP = tenHP;
-        this.maMH = maMH;
-        this.tenKhoa = tenKhoa;
+    public int getId() {
+        return Id;
     }
 
-    public String getMaHP() {
-        return maHP;
+    public void setId(int Id) {
+        this.Id = Id;
     }
 
-    public void setMaHP(String maHP) {
-        this.maHP = maHP;
+    public String getName() {
+        return Name;
     }
 
-    public String getTenHP() {
-        return tenHP;
+    public void setName(String Name) {
+        this.Name = Name;
     }
 
-    public void setTenHP(String tenHP) {
-        this.tenHP = tenHP;
+    public String getDiemCC() {
+        return diemCC;
     }
 
-    public String getMaMH() {
-        return maMH;
+    public void setDiemCC(String diemCC) {
+        this.diemCC = diemCC;
     }
 
-    public void setMaMH(String maMH) {
-        this.maMH = maMH;
+    public String getDiemGK() {
+        return diemGK;
     }
 
-    public String getTenKhoa() {
-        return tenKhoa;
+    public void setDiemGK(String diemGK) {
+        this.diemGK = diemGK;
     }
 
-    public void setTenKhoa(String tenKhoa) {
-        this.tenKhoa = tenKhoa;
+    public String getDiemCK() {
+        return diemCK;
+    }
+
+    public void setDiemCK(String diemCK) {
+        this.diemCK = diemCK;
     }
     
 }

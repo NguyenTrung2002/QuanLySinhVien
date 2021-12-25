@@ -14,6 +14,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         setTitle("Đăng Nhập");
+        setLocationRelativeTo(this);
         
     }
 
@@ -44,6 +45,9 @@ public class Login extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 204, 204));
+
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
         jbDangnhap.setText("Đăng nhập");
         jbDangnhap.addActionListener(new java.awt.event.ActionListener() {
@@ -75,8 +79,11 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setBackground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Mật khẩu");
 
+        jLabel1.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel1.setText("Tên đăng nhập");
 
         jbXoa.setText("Xóa");
@@ -88,7 +95,19 @@ public class Login extends javax.swing.JFrame {
 
         jcbUsertype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sinh viên", "Giáo viên", "Admin" }));
 
+        jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("Chức danh");
+
+        jPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordActionPerformed(evt);
+            }
+        });
+        jPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jPasswordKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -137,29 +156,23 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbUsertype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbDangnhap)
                     .addComponent(jbThoat)
                     .addComponent(jbXoa))
-                .addGap(83, 83, 83))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(75, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -178,20 +191,24 @@ public class Login extends javax.swing.JFrame {
             String usertypeStr = jcbUsertype.getSelectedItem().toString();
             
             if(operation.isLogin(usernameStr, passwordStr,usertypeStr, this)){
-                if(usertypeStr == "Sinh viên"){
-                    DangNhap.passWordString = passwordStr;
-                    new MainSV().setVisible(true);
-                    this.dispose();
-                }
-                else if(usertypeStr == "Giáo viên"){
-                    DangNhap.passWordString = passwordStr;
-                    new MainGV().setVisible(true);
-                    this.dispose();
-                }
-                else if(usertypeStr == "Admin"){
-                    DangNhap.passWordString = passwordStr;
-                    new MainAdmin().setVisible(true);
-                    this.dispose();
+                if(null != usertypeStr)switch (usertypeStr) {
+                    case "Sinh viên":
+                        DangNhap.passWordString = passwordStr;
+                        new MainSV().setVisible(true);
+                        this.dispose();
+                        break;
+                    case "Giáo viên":
+                        DangNhap.passWordString = passwordStr;
+                        new MainGV().setVisible(true);
+                        this.dispose();
+                        break;
+                    case "Admin":
+                        DangNhap.passWordString = passwordStr;
+                        new MainAdmin().setVisible(true);
+                        this.dispose();
+                        break;
+                    default:
+                        break;
                 }
             }else{
                 JOptionPane.showMessageDialog(this, "Sai tên đăng nhập / mật khẩu hoặc chức vụ");
@@ -203,9 +220,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jUsernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jUsernameKeyReleased
         // TODO add your handling code here:
-       if (evt.getKeyCode() == evt.VK_ENTER) {
-            jPassword.requestFocus();
-        }
+       
     }//GEN-LAST:event_jUsernameKeyReleased
 
     private void jbDangnhapKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbDangnhapKeyReleased
@@ -223,6 +238,15 @@ public class Login extends javax.swing.JFrame {
         jUsername.setText(null);
         jPassword.setText(null);
     }//GEN-LAST:event_jbXoaActionPerformed
+
+    private void jPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordActionPerformed
+
+    private void jPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordKeyReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jPasswordKeyReleased
     
     
     /**
@@ -236,7 +260,7 @@ public class Login extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
